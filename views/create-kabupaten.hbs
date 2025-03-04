@@ -19,29 +19,29 @@
       {{/if}}
 
       <div class="container mt-5">
-        <h2 class="mb-4">Tambah Data Provinsi</h2>
+        <h2 class="mb-4">Tambah Data Kabupaten</h2>
 
         <form
-          action="/create-provinsi"
+          action="/create-kabupaten"
           method="POST"
           enctype="multipart/form-data"
         >
-          <label for="">nama provinsi</label>
-          <input type="text" name="nama" placeholder="Nama Provinsi" required />
-          <label for="">diresmikan</label>
+          <label for="">Nama Kabupaten</label>
+          <input
+            type="text"
+            name="nama"
+            placeholder="Nama Kabupaten"
+            required
+          />
+          <label for="">Diresmikan</label>
           <input type="date" name="diresmikan" required />
-          <label for="">Foto Provinsi</label>
+          <label for="">Foto Kabupaten</label>
           <input name="image" type="file" id="image" />
-          <label for="">Wilayah</label>
-          <select name="pulau" required>
-            <option value="Jawa">Jawa</option>
-            <option value="Sumatera">Sumatera</option>
-            <option value="Kalimantan">Kalimantan</option>
-            <option value="Sulawesi">Sulawesi</option>
-            <option value="Papua">Papua</option>
-            <option value="Kepulauan Nusa Tenggara">
-              Kepulauan Nusa Tenggara Barat</option>
-            <option value="Kepulauan Maluku">Kepulauan Maluku</option>
+          <label for="">Provinsi</label>
+          <select name="provinsi" required>
+            {{#each provinsi}}
+              <option value="{{this.nama}}">{{this.nama}}</option>
+            {{/each}}
           </select>
           <button type="submit">Simpan</button>
         </form>

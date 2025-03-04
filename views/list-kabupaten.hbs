@@ -6,7 +6,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     />
-    <title>HOME</title>
+    <title>List Kabupaten</title>
   </head>
   <body>
     <div class="container">
@@ -27,15 +27,15 @@
         <a href="/create-kabupaten" class="btn btn-success">Add Kabupaten</a>
       {{/if}}
       <div class="container mt-5">
-        <h2 class="mb-4 text-center">Daftar Provinsi</h2>
+        <h2 class="mb-4 text-center">Daftar Kabupaten</h2>
         {{#if messages.error}}
           <div class="alert alert-danger text-center" role="alert">
             {{messages.error}}
           </div>
         {{/if}}
-        <a href="/list-kabupaten" class="btn btn-success">List Kabupaten</a> <br><br>
+      <a href="/" class="btn btn-primary">List Provinsi</a><br><br>
         <div class="row">
-          {{#each provinsi}}
+          {{#each kabupaten}}
             <!-- Card 1 -->
             <div class="col-md-3 mb-4">
               <div class="card">
@@ -47,14 +47,13 @@
                 <div class="card-body text-center">
                   <h5 class="card-title">{{this.nama}}</h5>
                   <p class="card-text">{{formateDate this.diresmikan}}</p>
-                  <p class="card-text">{{this.pulau}}</p>
-                  <p class="card-text">dibuat oleh : {{this.user.username}}</p>
-                  <a href="#" class="btn btn-primary">Detail</a>
+                  <p class="card-text">{{this.Provinsi.pulau}}</p>
+                  <p class="card-text">Provinsi : {{this.Provinsi.nama}}</p>
                   
-                  {{#if (equal ../user.id this.user.id)}}
-                    <a href="/edit-provinsi/{{this.id}}" class="btn btn-success">Edit</a>
+                  {{#if (equal ../user.id this.Provinsi.user_id)}}
+                    <a href="/edit-kabupaten/{{this.id}}" class="btn btn-success">Edit</a>
                   
-                    <form action="/delete/{{this.id}}?_method=DELETE" method="post">
+                    <form action="/delete-kabupaten/{{this.id}}?_method=DELETE" method="post">
                       <button type="submit" class="btn btn-danger" style="display: inline !important;" onclick="confirm('are u sure want to delete this?')">Delete</button>
                     </form>
                   {{/if}}

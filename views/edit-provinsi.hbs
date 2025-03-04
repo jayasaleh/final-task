@@ -1,0 +1,66 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    />
+    <title>Edit Provinsi</title>
+  </head>
+  <body>
+    <div class="container">
+
+      {{#if user}}
+        <p>Welcome, {{user.username}}!</p>
+        <a href="/logout">Logout</a>
+      {{else}}
+        <a href="/login">Login</a>
+      {{/if}}
+
+      <div class="container mt-5">
+        <h2 class="mb-4">Tambah Data Provinsi</h2>
+
+        <form
+          action="/edit-provinsi/{{editProvinsi.id}}?_method=PATCH"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          <label for="">nama provinsi</label>
+          <input
+            type="text"
+            name="nama"
+            placeholder="Nama Provinsi"
+            value="{{editProvinsi.nama}}"
+            required
+          />
+          <label for="">diresmikan</label>
+          <input
+            type="date"
+            name="diresmikan"
+            value="{{editTime editProvinsi.diresmikan}}"
+            required
+          />
+          <label for="">Foto Provinsi</label>
+          <input name="image" type="file" id="image" />
+          <label for="">Wilayah</label>
+          <select name="pulau" required>
+            <option
+              value="{{editProvinsi.pulau}}"
+            >{{editProvinsi.pulau}}</option>
+            <option value="Jawa">Jawa</option>
+            <option value="Sumatera">Sumatera</option>
+            <option value="Kalimantan">Kalimantan</option>
+            <option value="Sulawesi">Sulawesi</option>
+            <option value="Papua">Papua</option>
+            <option value="Kepulauan Nusa Tenggara">
+              Kepulauan Nusa Tenggara Barat</option>
+            <option value="Kepulauan Maluku">Kepulauan Maluku</option>
+          </select>
+          <button type="submit">Simpan</button>
+        </form>
+
+      </div>
+    </div>
+  </body>
+</html>
