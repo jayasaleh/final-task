@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Kabupaten.belongsTo(models.Provinsi, {
         foreignKey: "provinsi_id",
+        as: "provinsi",
         onDelete: "SET NULL", // Jika Provinsi dihapus, provinsi_id di Kabupaten jadi NULL
         onUpdate: "CASCADE", // Jika ID Provinsi berubah, provinsi_id ikut berubah
       });

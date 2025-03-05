@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,12 +7,12 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     />
-    <title>Tambah Kabupaten</title>
+    <title>Edit Kabupaten</title>
   </head>
   <body>
     <div class="container mt-4">
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Tambah Data Kabupaten</h2>
+        <h2 class="mb-0">Edit Kabupaten</h2>
         <div>
           {{#if user}}
             <span class="me-3">Welcome, {{user.username}}!</span>
@@ -21,32 +22,15 @@
           {{/if}}
         </div>
       </div>
-
       <div class="card shadow-sm p-4">
-
-        <form
-          action="/create-kabupaten"
-          method="POST"
-          enctype="multipart/form-data"
-        >
+        <form action="/edit-kabupaten/{{kabupaten.id}}?_method=PATCH" method="POST" enctype="multipart/form-data">
           <div class="mb-3">
             <label class="form-label">Nama Kabupaten</label>
-            <input
-              type="text"
-              name="nama"
-              class="form-control"
-              placeholder="Nama Kabupaten"
-              required
-            />
+            <input type="text" name="nama" class="form-control" placeholder="Nama Kabupaten" value="{{kabupaten.nama}}" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Diresmikan</label>
-            <input
-              type="date"
-              name="diresmikan"
-              class="form-control"
-              required
-            />
+            <input type="date" name="diresmikan" class="form-control" value="{{editTime kabupaten.diresmikan}}" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Foto Kabupaten</label>
@@ -56,7 +40,9 @@
             <label class="form-label">Provinsi</label>
             <select name="provinsi" class="form-select" required>
               {{#each provinsi}}
-                <option value="{{this.id}}">{{this.nama}}</option>
+                <option value="{{this.id}}" {{#if (equal this.id ../kabupaten.provinsi_id)}}selected{{/if}}>
+                  {{this.nama}}
+                </option>
               {{/each}}
             </select>
           </div>

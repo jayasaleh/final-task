@@ -8,20 +8,27 @@ const session = require("express-session");
 const methodOverride = require("method-override");
 const uploadProvinsi = require("./middlewares/upload-provinsi");
 const {
+  logout,
   renderHome,
+  renderDetailProvinsi,
   renderRegister,
   renderAddProvinsi,
   renderAddKabupaten,
   renderLogin,
   renderEditProvinsi,
+  renderEditKabupaten,
   renderKabupaten,
   authRegister,
   authLogin,
   addProvinsi,
+  addKabupaten,
   deleteProvinsi,
   updateProvinsi,
+  updateKabupaten,
+  deleteKabupaten,
 } = require("./controllers/controllers");
 const { formateDate, editTime } = require("./utils/timefunc");
+const uploadKabupaten = require("./middlewares/uploads-kabupaten");
 
 require("dotenv").config();
 const port = process.env.PORT || 3000;
@@ -63,7 +70,10 @@ app.use(
   "/uploads_provinsi",
   express.static(path.join(__dirname, "./uploads_provinsi"))
 );
-
+app.use(
+  "/uploads_kabupaten",
+  express.static(path.join(__dirname, "./uploads_kabupaten"))
+);
 // Routing untuk halaman utama
 app.get("/", renderHome);
 app.get("/register", renderRegister);
@@ -72,15 +82,23 @@ app.get("/create-provinsi", renderAddProvinsi);
 app.get("/edit-provinsi/:id", renderEditProvinsi);
 app.get("/list-kabupaten", renderKabupaten);
 app.get("/create-kabupaten", renderAddKabupaten);
-
+app.get("/edit-kabupaten/:id", renderEditKabupaten);
+app.get("/detail-provinsi/:id", renderDetailProvinsi);
+app.get("/logout", logout);
 //Semua function Post
 app.post("/register", authRegister);
 app.post("/login", authLogin);
 app.post("/create-provinsi", uploadProvinsi.single("image"), addProvinsi);
-
+app.post("/create-kabupaten", uploadKabupaten.single("image"), addKabupaten);
 //update
 app.patch("/edit-provinsi/:id", uploadProvinsi.single("image"), updateProvinsi);
+app.patch(
+  "/edit-kabupaten/:id",
+  uploadKabupaten.single("image"),
+  updateKabupaten
+);
 //delete
+app.delete("/delete-kabupaten/:id", deleteKabupaten);
 app.delete("/delete/:id", deleteProvinsi);
 // Menjalankan server
 app.listen(port, () => {
